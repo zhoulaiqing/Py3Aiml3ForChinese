@@ -293,7 +293,12 @@ class Kernel:
                 continue
             # store the pattern/template pairs in the PatternMgr.
             for key,tem in list(handler.categories.items()):
-                self._brain.add(key,tem)
+                newkey = []
+                for k in key:
+                    if k != '*':
+                        newkey.append(u' '.join(splitChinese(k)))
+                    else: newkey.append(k)
+                self._brain.add(tuple(newkey),tem)
             # Parsing was successful.
             if self._verboseMode:
                 print("done (%.2f seconds)" % (time.clock() - start))
@@ -983,7 +988,9 @@ class Pattert exist, the empty string is returned.
             index = int(elem[1]['index'].split(',')[0])
         except:
             pass
-        try: return outputHistory[-index]
+        try:
+            print(outputHistory[-index]) 
+            return outputHistory[-index]
         except IndexError:
             if self._verboseMode:
                 err = "No such index %d while processing <that> element.\n" % index

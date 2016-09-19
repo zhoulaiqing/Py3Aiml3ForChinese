@@ -4,6 +4,7 @@
 
 import marshal
 import pprint
+from .LangSupport import splitChinese
 import re
 import string
 import sys
@@ -63,6 +64,7 @@ class PatternMgr:
 			self._templateCount = marshal.load(inFile)
 			self._botName = marshal.load(inFile)
 			self._root = marshal.load(inFile)
+			print('infile is ', filename)
 			inFile.close()
 		except Exception as e:
 			print("Error restoring PatternMgr from file %s:" % filename)
@@ -141,6 +143,7 @@ class PatternMgr:
 		thatInput = that.upper()
 		thatInput = re.sub(self._puncStripRE, " ", thatInput)
 		thatInput = re.sub(self._whitespaceRE, " ", thatInput)
+		thatInput = u' '.join(splitChinese(thatInput))
 		if topic.strip() == "": topic = "ULTRABOGUSDUMMYTOPIC" # 'topic' must never be empty
 		topicInput = topic.upper()
 		topicInput = re.sub(self._puncStripRE, " ", topicInput)
@@ -168,6 +171,7 @@ class PatternMgr:
 		thatInput = that.upper()
 		thatInput = re.sub(self._puncStripRE, " ", thatInput)
 		thatInput = re.sub(self._whitespaceRE, " ", thatInput)
+		thatInput = u' '.join(splitChinese(thatInput))
 		if topic.strip() == "": topic = "ULTRABOGUSDUMMYTOPIC" # 'topic' must never be empty
 		topicInput = topic.upper()
 		topicInput = re.sub(self._puncStripRE, " ", topicInput)
