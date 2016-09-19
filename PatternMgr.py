@@ -64,7 +64,6 @@ class PatternMgr:
 			self._templateCount = marshal.load(inFile)
 			self._botName = marshal.load(inFile)
 			self._root = marshal.load(inFile)
-			print('infile is ', filename)
 			inFile.close()
 		except Exception as e:
 			print("Error restoring PatternMgr from file %s:" % filename)

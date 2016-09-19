@@ -989,7 +989,6 @@ class Pattert exist, the empty string is returned.
         except:
             pass
         try:
-            print(outputHistory[-index]) 
             return outputHistory[-index]
         except IndexError:
             if self._verboseMode:
